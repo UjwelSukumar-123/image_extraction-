@@ -1,0 +1,6 @@
+PyMuPDF
+torch
+sentence-transformers
+Pillow
+numpy
+git+https://github.com/openai/CLIP.git
