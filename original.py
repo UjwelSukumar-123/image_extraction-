@@ -60,6 +60,7 @@ class PDFNearestImageExtractor:
         block_embeds = self.text_model.encode(block_texts)
         query_embed = self.text_model.encode([normalize(query)])
         sims = np.dot(block_embeds, query_embed.T).squeeze()
+        sims = np.atleast_1d(sims)  # Ensure sims is always at least 1D
         best_idx = int(np.argmax(sims))
         return text_blocks[best_idx], sims[best_idx]
 
@@ -160,8 +161,8 @@ class PDFNearestImageExtractor:
 
 
 if __name__ == "__main__":
-    pdf_path = r"C:\Users\Netcom\Desktop\img ext\unit_67ad98f76de7f1459b25a3c4.pdf"
-    query = "What is the first color of the rainbow?"
+    pdf_path = r"D:\image_extraction-\unit_67ad9a036de7f1459b25a40f.pdf"
+    query = "phone"
     extractor = PDFNearestImageExtractor()
     img = extractor.find_image_for_query(pdf_path, query)   
     if img is not None:
